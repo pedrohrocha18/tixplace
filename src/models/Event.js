@@ -1,9 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/db.js";
-import bcrypt from "bcrypt";
 
-const User = sequelize.define(
-  "User",
+const Event = sequelize.define(
+  "Event",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,33 +14,26 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    password: {
+    location: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    admin: {
-      type: DataTypes.BOOLEAN,
+    date: {
+      type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    totalTickets: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
   {
-    tableName: "users",
+    tableName: "events",
   }
 );
 
-User.beforeCreate(async (user) => {
-  try {
-    const saltRounds = 10;
-    user.password = await bcrypt.hash(user.password, saltRounds);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-export default User;
+export default Event;

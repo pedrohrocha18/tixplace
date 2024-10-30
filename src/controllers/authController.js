@@ -17,7 +17,7 @@ class authController {
         return res.status(401).json({ message: "E-mail ou senha incorretos." });
       }
 
-      res.status(200).json({ message: "Login efetuado!", userId: user.id });
+      res.status(200).json({ message: "Login efetuado!", usuario: user.name });
     } catch (error) {
       res
         .status(500)
